@@ -1,0 +1,10 @@
+#!/bin/sh
+PATHMONITORHOME=/var/run/pathmonitor
+PATHMONITORUSER=pathmonitor
+
+adduser --system \
+		--quiet \
+		--home "$PATHMONITORHOME" \
+		--no-create-home \
+		--disabled-password \
+		--group "$PATHMONITORUSER"
