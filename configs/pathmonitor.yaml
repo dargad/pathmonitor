@@ -1,0 +1,10 @@
+log:
+    # debug | info | error | critical
+    level: debug
+    # file://<path> | syslog
+    output: file:///tmp/media-monitor.log
+paths:
+    - path: /media/files
+      filter: .*.txt
+      command: ls -l {}
+
