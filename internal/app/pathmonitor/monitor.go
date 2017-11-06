@@ -2,7 +2,7 @@ package pathmonitor
 
 import (
 	"errors"
-	"github.com/fsnotify/fsnotify"
+	"github.com/go-fsnotify/fsnotify"
 	"log"
 	"path/filepath"
 	"regexp"

@@ -3,11 +3,11 @@ Section: devel
 Priority: extra
 Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
 Uploaders: Dariusz Gadomski <dgadomski@gmail.com>
-Build-Depends: debhelper (>= 10),
+Build-Depends: debhelper (>= 9),
                dh-golang,
                golang-any,
-               golang-github-fsnotify-fsnotify-dev,
-               golang-gopkg-yaml.v2-dev
+               golang-github-go-fsnotify-fsnotify-dev | golang-github-fsnotify-fsnotify-dev,
+               golang-yaml.v2-dev
 Standards-Version: 4.0.0
 Homepage: https://github.com/dargad/pathmonitor
 Vcs-Browser: https://anonscm.debian.org/cgit/pkg-go/packages/pathmonitor.git
