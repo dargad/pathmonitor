@@ -6,10 +6,10 @@ import (
 )
 
 var (
-	Trace   *log.Logger
-	Info    *log.Logger
-	Warning *log.Logger
-	Error   *log.Logger
+	Trace   *log.Writer
+	Info    *log.Writer
+	Warning *log.Writer
+	Error   *log.Writer
 )
 
 func LogInit() {

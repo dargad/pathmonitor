@@ -4,6 +4,7 @@ Priority: extra
 Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
 Uploaders: Dariusz Gadomski <dgadomski@gmail.com>
 Build-Depends: debhelper (>= 9),
+               dh-systemd (>= 1.5),
                dh-golang,
                golang-any,
                golang-github-go-fsnotify-fsnotify-dev | golang-github-fsnotify-fsnotify-dev,
