@@ -15,9 +15,9 @@ func initFlags() {
 }
 
 func main() {
-	pathmonitor.LogInit()
 	initFlags()
 	flag.Parse()
+	pathmonitor.LogInit(Log{Level: "error", Output: "stdout"})
 	pathmonitor.Trace.Println("Reading config.")
 	c, err := pathmonitor.ReadConfig(configPath)
 	if err != nil {
@@ -25,6 +25,7 @@ func main() {
 			err)
 		return
 	}
+	pathmonitor.LogInit(c.Log)
 	pathmonitor.Trace.Println("Creating monitor.")
 	m := pathmonitor.NewMonitor(c)
 	pathmonitor.Trace.Println("Running monitor...")

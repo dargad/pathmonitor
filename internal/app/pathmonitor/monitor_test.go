@@ -16,7 +16,6 @@ var (
 	configContent string = `
 log:
     level: debug
-    output: file:///tmp/pathmonitor.log
 paths:
     - path: %s
       filter: .*
@@ -33,7 +32,7 @@ func AssertTrue(t *testing.T, cond bool, failMsg string) {
 func Init() {
 	if monitor == nil {
 		var err error
-		pathmonitor.LogInit()
+		pathmonitor.LogInit(pathmonitor.Log{Level: "debug", Output: "file:///tmp/pathmonitor.log"})
 		testDir, err = ioutil.TempDir("", "")
 		if err != nil {
 			pathmonitor.Error.Println("Can't create test dir: ", err)

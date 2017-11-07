@@ -5,11 +5,13 @@ import (
 	"io/ioutil"
 )
 
+type Log struct {
+	Level  string
+	Output string
+}
+
 type Config struct {
-	Log struct {
-		Level  string
-		Output string
-	}
+	Log
 	Paths []struct {
 		Path    string
 		Filter  string
