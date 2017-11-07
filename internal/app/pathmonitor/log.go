@@ -1,6 +1,7 @@
 package pathmonitor
 
 import (
+	"io"
 	"log"
 	"os"
 )
