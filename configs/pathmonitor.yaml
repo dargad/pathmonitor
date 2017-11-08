@@ -1,8 +1,8 @@
 log:
     # debug | info | warning | error
-    level: debug
+    level: warning
     # file://<path> | syslog
-    output: file:///tmp/media-monitor.log
+    output: syslog
 paths:
     - path: /media/files
       filter: .*.txt
