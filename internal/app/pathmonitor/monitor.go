@@ -2,8 +2,9 @@ package pathmonitor
 
 import (
 	"errors"
-	"github.com/go-fsnotify/fsnotify"
+	"github.com/fsnotify/fsnotify"
 	"log"
+	"os"
 	"path/filepath"
 	"regexp"
 	"strings"
@@ -28,14 +29,30 @@ func NewMonitor(c Config) *Monitor {
 	m.watcher = watcher
 
 	for _, path := range m.config.Paths {
-		Info.Println("Adding path:", path.Path)
-		err := m.watcher.Add(path.Path)
-		if err != nil {
-			Warning.Println("Skipping path", path.Path, ":", err)
-		}
+		m.addRecursive(path.Path)
 	}
 
 	return m
+}
+
+func (m *Monitor) addRecursive(p string) {
+	filepath.Walk(p, func(path string, info os.FileInfo, err error) error {
+		Info.Println("Adding path:", path)
+		err = m.watcher.Add(path)
+		if err != nil {
+			Warning.Println("Skipping path", p, ":", err)
+		}
+		return nil
+	})
+}
+
+func isDirectory(path string) bool {
+	fi, err := os.Stat(path)
+	if err != nil {
+		Info.Println("Testing", path, ":", err)
+		return false
+	}
+	return fi.IsDir()
 }
 
 func (m *Monitor) Run() {
@@ -43,6 +60,9 @@ func (m *Monitor) Run() {
 		select {
 		case event := <-m.watcher.Events:
 			if event.Op&(fsnotify.Create|fsnotify.Rename) > 0 {
+				if isDirectory(event.Name) {
+					m.addRecursive(event.Name)
+				}
 				Info.Println("File added:", event.Name)
 				m.executeIfFileMatches(event.Name)
 			}
