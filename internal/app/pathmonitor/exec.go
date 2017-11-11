@@ -25,7 +25,11 @@ func ExecuteCommand(command string) (bool, error) {
 	default:
 		return false, errors.New("No or unknown command to execute.")
 	}
-	err := cmd.Run()
+	//err := cmd.Run()
+	res, err := cmd.CombinedOutput()
+	if err != nil {
+		Error.Println("Failed:", res)
+	}
 	return err == nil, err
 }
 
