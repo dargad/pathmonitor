@@ -1,0 +1,5 @@
+#!/bin/sh
+
+CONFIG_FILE=$SNAP/configs/pathmonitor.yaml
+
+cp $CONFIG_FILE $SNAP_COMMON/

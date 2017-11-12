@@ -1,0 +1,36 @@
+name: pathmonitor
+version: "0.0.1snap1"
+summary: a purely educational attempt to practice Go skills
+description: |
+  This is a purely educational attempt to practice Go skills. I
+  needed a daemon that will monitor some directories in my filesystem and
+  run a command if a new file is detected in monitored locations.
+grade: stable
+confinement: classic
+#icon: snap/gui/icon.png
+
+apps:
+    pathmonitor:
+        command: bin/pathmonitor -c ${SNAP_COMMON}/pathmonitor.yaml
+
+    pathmonitor-service:
+        command: bin/pathmonitor -c ${SNAP_COMMON}/pathmonitor.yaml
+        daemon: simple
+parts:
+    pathmonitor:
+        source: .
+        #source: https://github.com/dargad/pathmonitor
+        #source-type: git
+        go-importpath: github.com/dargad/pathmonitor
+        plugin: go
+        after: [go]
+    configs:
+        plugin: dump
+        source: https://github.com/dargad/pathmonitor.git
+        source-subdir: configs
+        source-type: git
+        organize:
+            pathmonitor.yaml: configs/pathmonitor.yaml
+        after: [pathmonitor]
+    go:
+        source-tag: go1.8
