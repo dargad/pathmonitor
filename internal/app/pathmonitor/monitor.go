@@ -88,7 +88,7 @@ func (m *Monitor) executeIfFileMatches(filename string) bool {
 	Trace.Printf("Checking pattern '%s' for file '%s'", pattern, filename)
 
 	if err == nil {
-		if match, err := regexp.MatchString(pattern, filename); err != nil {
+		if match, err := regexp.MatchString(pattern, strings.ToLower(filename)); err != nil {
 			Error.Printf("Can't match pattern '%s' to file '%s': err",
 				pattern, filename, err)
 		} else if match {
