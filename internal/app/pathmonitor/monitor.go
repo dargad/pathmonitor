@@ -55,12 +55,23 @@ func isDirectory(path string) bool {
 	return fi.IsDir()
 }
 
+func (m *Monitor) scanDirectory(dir string) {
+	Info.Println("Scanning new directory:", dir)
+	filepath.Walk(dir, func(path string, info os.FileInfo, err error) error {
+		if !isDirectory(path) {
+			m.executeIfFileMatches(path)
+		}
+		return nil
+	})
+}
+
 func (m *Monitor) Run() {
 	for {
 		select {
 		case event := <-m.watcher.Events:
 			if event.Op&(fsnotify.Create|fsnotify.Rename) > 0 {
 				if isDirectory(event.Name) {
+					m.scanDirectory(event.Name)
 					m.addRecursive(event.Name)
 				}
 				Info.Println("File added:", event.Name)
