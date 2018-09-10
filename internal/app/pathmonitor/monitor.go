@@ -89,7 +89,7 @@ func (m *Monitor) executeIfFileMatches(filename string) bool {
 
 	if err == nil {
 		if match, err := regexp.MatchString(pattern, strings.ToLower(filename)); err != nil {
-			Error.Printf("Can't match pattern '%s' to file '%s': err",
+			Error.Printf("Can't match pattern '%s' to file '%s': %s",
 				pattern, filename, err)
 		} else if match {
 			Trace.Println("Executing command:", command)
