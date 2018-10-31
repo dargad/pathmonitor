@@ -28,7 +28,7 @@ func ExecuteCommand(command string) (bool, error) {
 	//err := cmd.Run()
 	res, err := cmd.CombinedOutput()
 	if err != nil {
-		Error.Println("Failed:", res)
+		Error.Printf("Failed: %s", res)
 	}
 	return err == nil, err
 }

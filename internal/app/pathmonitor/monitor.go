@@ -92,10 +92,11 @@ func (m *Monitor) executeIfFileMatches(filename string) bool {
 			Error.Printf("Can't match pattern '%s' to file '%s': %s",
 				pattern, filename, err)
 		} else if match {
-			Trace.Println("Executing command:", command)
-			res, err := ExecuteCommand(ReplacePlaceholders(command, filename))
+			cmd := ReplacePlaceholders(command, filename)
+			Trace.Println("Executing command:", cmd)
+			res, err := ExecuteCommand(cmd)
 			if err != nil {
-				Error.Printf("Error executing '%s': %s", command, err)
+				Error.Printf("Error executing '%s': %s", cmd, err)
 				return false
 			}
 			Trace.Println("Command executed:", res)
