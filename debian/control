@@ -1,0 +1,33 @@
+Source: pathmonitor
+Section: devel
+Priority: optional
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Uploaders: Dariusz Gadomski <dariusz.gadomski@canonical.com>
+Build-Depends: debhelper (>= 11),
+               dh-golang,
+               golang-any,
+               golang-github-fsnotify-fsnotify-dev,
+               golang-yaml.v2-dev
+Standards-Version: 4.1.4
+Homepage: https://github.com/dargad/pathmonitor
+Vcs-Browser: https://salsa.debian.org/go-team/packages/pathmonitor
+Vcs-Git: https://salsa.debian.org/go-team/packages/pathmonitor.git
+XS-Go-Import-Path: github.com/dargad/pathmonitor
+Testsuite: autopkgtest-pkg-go
+
+Package: pathmonitor
+Architecture: any
+Built-Using: ${misc:Built-Using}
+Depends: ${misc:Depends},
+         ${shlibs:Depends}
+Description: 
+ pathmonitor This is a purely educational attempt to practice Go skills. I
+ needed a daemon that will monitor some directories in my filesystem and
+ run a command if a new file is detected in monitored locations.
+ .
+ I am aware that it is also possible to implement this with Python, a
+ bash script or in a hundred different technologies, but my primary goal
+ was to practice my newly obtained Go skills to do something practical
+ for my own use.  Usage Eventually the daemon will be controlled by a
+ systemd service and a config file under /etc/pathmonitor.yaml. Example
+ unit file and config file are in the source code.

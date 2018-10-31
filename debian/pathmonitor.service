@@ -1,0 +1,9 @@
+[Unit]
+Description=Run pathmonitor daemon.
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/pathmonitor -c /etc/pathmonitor.yaml
+
+[Install]
+WantedBy=multi-user.target

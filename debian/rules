@@ -1,0 +1,9 @@
+#!/usr/bin/make -f
+
+override_dh_installsystemd:
+	dh_installsystemd --name=pathmonitor
+
+override_dh_auto_install:
+	dh_auto_install -- --no-source
+%:
+	dh $@ --buildsystem=golang --with=golang
