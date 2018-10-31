@@ -37,10 +37,12 @@ func NewMonitor(c Config) *Monitor {
 
 func (m *Monitor) addRecursive(p string) {
 	filepath.Walk(p, func(path string, info os.FileInfo, err error) error {
-		Info.Println("Adding path:", path)
-		err = m.watcher.Add(path)
-		if err != nil {
-			Warning.Println("Skipping path", p, ":", err)
+		if isDirectory(path) {
+			Info.Println("Adding path:", path)
+			err = m.watcher.Add(path)
+			if err != nil {
+				Warning.Println("Skipping path", p, ":", err)
+			}
 		}
 		return nil
 	})
